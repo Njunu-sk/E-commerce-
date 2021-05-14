@@ -1,24 +1,21 @@
-# README
+# Brokers-inn
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple E-commerce aplication built to help small businesses scale. 
 
-Things you may want to cover:
+Technologies in place
 
 * Ruby version
-
+   ```bash
+   $ ruby -v 3.0
+   ```
+* Rails version 
+  ```rb
+   gem 'rails', '~> 6.1.3' 
+  ```
 * System dependencies
+  `gem pg` for our database
 
 * Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  - `git clone <repo>` to your local machine, `bundle install` to update your gemfiles.
+  - `rails server` to start your server
+  
