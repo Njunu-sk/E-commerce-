@@ -10,6 +10,7 @@ import "channels";
 
 require("stylesheets/application.scss");
 require("alpinejs");
+global.toastr = require("toastr");
 
 Rails.start();
 Turbolinks.start();
