@@ -1,148 +1,427 @@
-
-<div class="grid md:grid-cols-8">
-    <div class="md:col-span-1 md:flex md:justify-end" x-data="{ isOpen: false }">
-      <nav class="text-right">
-        <div class="flex justify-between items-center">
-          <h1 class="font-bold uppercase p-4 border-gray-100">
-            <a class="text-green-500 sm:text-blue-500 lg:text-red-500">Brokers Inn</a>
-          </h1>
-          <div class="px-4 cursor-pointer md:hidden" @click="isOpen = !isOpen">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
-            </svg>
-          </div>
-        </div>
-        <!--menu if mobile set to hidden-->
-        <ul class="text-sm mt-6 md:block" x-show="isOpen">
-          <li class="text-gray-700 font-bold py-1">
-            <a href="#" class="px-4 flex justify-end">
-              <span>Home</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-            </a>
-          </li>
-          <li class="py-1">
-            <a href="#" class="px-4 flex justify-end">
-              <span>About</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </a>
-          </li>
-          <li class="py-1">
-            <a href="#" class="px-4 flex justify-end">
-              <span>Contact</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z" />
-                <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <main class="px-16 py-6 md:col-span-7 bg-gray-100">
-      <div class="flex justify-end md:justify-end">
-        <% if user_signed_in? %>
-          <%= link_to edit_user_registration_path, :class => 'btn text-primary border-primary md:border-2 hover:bg-primary hover:text-white mx-2' do %>
-            Edit Profile
-          <% end %>
-          <%= link_to destroy_user_session_path, :method => :delete, :class => 'btn text-primary border-primary md:border-2 hover:bg-primary hover:text-white' do %>
-            Log out
-          <% end %>
-          <% else %>
-          <%= link_to new_user_registration_path, :class => 'btn text-primary border-primary md:border-2 hover:bg-primary hover:text-white mx-2' do %>
-            Sign up
-          <% end %>
-          <%= link_to new_user_session_path, :class => 'btn text-primary border-primary md:border-2 hover:bg-primary hover:text-white' do %>
-            Log in
-          <% end %>
-        <% end %>
-        <% if can? :access, rails_admin %>
-          <%= link_to admin_dashboard_index_path, :class => 'btn text-primary border-primary md:border-2 hover:bg-primary hover:text-white mx-2' do %>
-            Visit Admin Page
-          <% end %>
-        <% end %>
-      </div>
-
-      <header>
-        <h2 class="text-gray-700 text-6xl font-semibold">Accessories</h2>
-        <h3 class="text-2xl font-semibold">Get your latest gadgets here...</h3>
-      </header>
-
-      <div>
-        <h4 class="font-bold pb-2 mt-12 border-b border-gray-200">Latest Gadgets</h4>
-
-        <div class="mt-8 grid lg:grid-cols-4 gap-10">
-          <!-- cards go here -->
-          <div class="card hover:shadow-lg">
-            <img src="https://images.unsplash.com/photo-1569696863868-45f498a50ef1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fGhlYWRwaG9uZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="headphone" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Celebrat</span>
-              <span class="block text-gray-500 text-sm">Product by Russ</span>
-            </div>
-            <div class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-
-          <div class="card hover:shadow-lg">
-            <img src="https://images.unsplash.com/photo-1600086827875-a63b01f1335c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGhlYWRwaG9uZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="headphone" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Celebrat</span>
-              <span class="block text-gray-500 text-sm">Product by Russ</span>
-            </div>
-            <div class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-
-          <div class="card hover:shadow-lg">
-            <img src="https://images.unsplash.com/photo-1553775744-0bae9da7f5e7?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fGhlYWRwaG9uZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="headphone" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Celebrat</span>
-              <span class="block text-gray-500 text-sm">Product by Russ</span>
-            </div>
-            <div class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-
-          <div class="card hover:shadow-lg">
-            <img src="https://images.unsplash.com/photo-1560718217-69193acc0713?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fGhlYWRwaG9uZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt="headphone" class="h-32 sm:h-48 w-full object-cover">
-            <div class="m-4">
-              <span class="font-bold">Celebrat</span>
-              <span class="block text-gray-500 text-sm">Product by Russ</span>
-            </div>
-            <div class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              <span>25 mins</span>
-            </div>
-          </div>
-        </div>
-
-        <h4 class="font-bold pb-2 mt-12 border-b border-gray-200">Most Popular</h4>
-
-        <div class="mt-8">
-          <!-- cards go here -->
-        </div>
-      </div>
-
-      <div class="mt-12 flex justify-center">
-        <div class="btn bg-secondary-100 text-secondary-200 inline-block hover:shadow-inner">Load more</div>
-      </div>
-    </main>
-  </div>
+   <main class="my-8">
+     <div class="container mx-auto px-6">
+       <div class="h-64 rounded-md overflow-hidden bg-cover bg-center" style="
+              background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144');
+            ">
+         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
+           <div class="px-10 max-w-xl">
+             <h2 class="text-2xl text-white font-semibold">Sport Shoes</h2>
+             <p class="mt-2 text-gray-400">
+               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+               Tempore facere provident molestias ipsam sint voluptatum
+               pariatur.
+             </p>
+             <button class="
+                    flex
+                    items-center
+                    mt-4
+                    px-3
+                    py-2
+                    bg-blue-600
+                    text-white text-sm
+                    uppercase
+                    font-medium
+                    rounded
+                    hover:bg-blue-500
+                    focus:outline-none
+                    focus:bg-blue-500
+                  ">
+               <span>Shop Now</span>
+               <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                 viewBox="0 0 24 24" stroke="currentColor">
+                 <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+               </svg>
+             </button>
+           </div>
+         </div>
+       </div>
+       <div class="md:flex mt-8 md:-mx-4">
+         <div class="
+                w-full
+                h-64
+                md:mx-4
+                rounded-md
+                overflow-hidden
+                bg-cover bg-center
+                md:w-1/2
+              " style="
+                background-image: url('https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80');
+              ">
+           <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
+             <div class="px-10 max-w-xl">
+               <h2 class="text-2xl text-white font-semibold">Back Pack</h2>
+               <p class="mt-2 text-gray-400">
+                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                 Tempore facere provident molestias ipsam sint voluptatum
+                 pariatur.
+               </p>
+               <button class="
+                      flex
+                      items-center
+                      mt-4
+                      text-white text-sm
+                      uppercase
+                      font-medium
+                      rounded
+                      hover:underline
+                      focus:outline-none
+                    ">
+                 <span>Shop Now</span>
+                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                 </svg>
+               </button>
+             </div>
+           </div>
+         </div>
+         <div class="
+                w-full
+                h-64
+                mt-8
+                md:mx-4
+                rounded-md
+                overflow-hidden
+                bg-cover bg-center
+                md:mt-0
+                md:w-1/2
+              " style="
+                background-image: url('https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
+              ">
+           <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
+             <div class="px-10 max-w-xl">
+               <h2 class="text-2xl text-white font-semibold">Games</h2>
+               <p class="mt-2 text-gray-400">
+                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                 Tempore facere provident molestias ipsam sint voluptatum
+                 pariatur.
+               </p>
+               <button class="
+                      flex
+                      items-center
+                      mt-4
+                      text-white text-sm
+                      uppercase
+                      font-medium
+                      rounded
+                      hover:underline
+                      focus:outline-none
+                    ">
+                 <span>Shop Now</span>
+                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                 </svg>
+               </button>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="mt-16">
+         <h3 class="text-gray-600 text-2xl font-medium">Fashions</h3>
+         <div class="
+                grid
+                gap-6
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+                mt-6
+              ">
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">Chanel</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">Man Mix</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1532667449560-72a95c8d381b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">Classic watch</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1590664863685-a99ef05e9f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=345&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">woman mix</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="mt-16">
+         <h3 class="text-gray-600 text-2xl font-medium">Fashions</h3>
+         <div class="
+                grid
+                gap-6
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+                mt-6
+              ">
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1563170351-be82bc888aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=376&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">Chanel</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">Man Mix</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1532667449560-72a95c8d381b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">Classic watch</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+           <div class="
+                  w-full
+                  max-w-sm
+                  mx-auto
+                  rounded-md
+                  shadow-md
+                  overflow-hidden
+                ">
+             <div class="flex items-end justify-end h-56 w-full bg-cover" style="
+                    background-image: url('https://images.unsplash.com/photo-1590664863685-a99ef05e9f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=345&q=80');
+                  ">
+               <button class="
+                      p-2
+                      rounded-full
+                      bg-blue-600
+                      text-white
+                      mx-5
+                      -mb-4
+                      hover:bg-blue-500
+                      focus:outline-none
+                      focus:bg-blue-500
+                    ">
+                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                   <path
+                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                   </path>
+                 </svg>
+               </button>
+             </div>
+             <div class="px-5 py-3">
+               <h3 class="text-gray-700 uppercase">woman mix</h3>
+               <span class="text-gray-500 mt-2">$12</span>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </main>

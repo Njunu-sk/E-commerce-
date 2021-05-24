@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_action :current_cart
+
+  def current_cart
+    @current_cart ||= ShoppingCart.new(token: cart_token)
+  end
+
+  helper_method :current_cart
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -19,4 +26,14 @@ class ApplicationController < ActionController::Base
       user_params.permit(:email, :password, :password_confirmation, :role)
     end
   end
+
+  private
+
+  def cart_token
+    return @cart_token unless @cart_token.nil?
+
+    session[:cart_token] ||= SecureRandom.hex(8)
+    @cart_token = session[:cart_token]
+  end
+
 end
